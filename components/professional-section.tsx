@@ -17,6 +17,7 @@ const professionalCards = [
     title: "Experience",
     description: "Explore my career journey and key accomplishments",
     icon: Briefcase,
+    href: "/experience",
   },
   {
     id: "skills",

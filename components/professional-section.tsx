@@ -30,6 +30,7 @@ const professionalCards = [
     title: "Goals",
     description: "My professional aspirations and future objectives",
     icon: Target,
+    href: "/goals",
   },
 ]
 

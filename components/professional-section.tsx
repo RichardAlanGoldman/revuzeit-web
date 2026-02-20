@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Card } from "@/components/ui/card"
 import { Briefcase, FileText, Code, Target } from "lucide-react"
 
@@ -9,6 +10,7 @@ const professionalCards = [
     title: "Resume",
     description: "View my complete professional background and qualifications",
     icon: FileText,
+    href: "/resume",
   },
   {
     id: "experience",
@@ -42,8 +44,10 @@ export function ProfessionalSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {professionalCards.map((card) => {
             const Icon = card.icon
+            const cardHref = card.href ?? `#${card.id}`
+            const Comp = card.href ? Link : "a"
             return (
-              <a key={card.id} href={`#${card.id}`} id={card.id} className="group cursor-pointer">
+              <Comp key={card.id} href={cardHref} id={card.id} className="group cursor-pointer">
                 <Card className="h-full bg-slate-900 border border-slate-700 hover:border-blue-500 p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-[1.02]">
                   <div className="flex flex-col gap-4">
                     <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center border border-slate-700 group-hover:border-blue-500 group-hover:bg-blue-500/10 transition-all duration-300">
@@ -57,7 +61,7 @@ export function ProfessionalSection() {
                     </div>
                   </div>
                 </Card>
-              </a>
+              </Comp>
             )
           })}
         </div>

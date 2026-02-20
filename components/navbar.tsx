@@ -1,17 +1,20 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { useIsMobile } from "@/hooks/use-mobile"
 
-const professionalLinks = [
-  { name: "Resume", href: "#resume" },
+type NavLink = { name: string; href: string; isRoute?: boolean }
+
+const professionalLinks: NavLink[] = [
+  { name: "Resume", href: "/resume", isRoute: true },
   { name: "Experience", href: "#experience" },
   { name: "Skills", href: "#skills" },
   { name: "Goals", href: "#goals" },
 ]
 
-const personalLinks = [
+const personalLinks: NavLink[] = [
   { name: "Biography", href: "#biography" },
   { name: "Family", href: "#family" },
   { name: "Travel", href: "#travel" },
@@ -31,16 +34,19 @@ export function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {professionalLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
-              </a>
-            ))}
+            {professionalLinks.map((link) => {
+              const Comp = link.isRoute ? Link : "a"
+              return (
+                <Comp
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
+                </Comp>
+              )
+            })}
             <div className="w-px h-6 bg-slate-300" />
             {personalLinks.map((link) => (
               <a
@@ -72,16 +78,19 @@ export function Navbar() {
           <div className="bg-slate-700 px-4 py-3">
             <div className="text-xs font-semibold text-slate-300 mb-2">Professional</div>
             <div className="space-y-1">
-              {professionalLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-600 transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {professionalLinks.map((link) => {
+                const Comp = link.isRoute ? Link : "a"
+                return (
+                  <Comp
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-600 transition-colors"
+                  >
+                    {link.name}
+                  </Comp>
+                )
+              })}
             </div>
           </div>
 

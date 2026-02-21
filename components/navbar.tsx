@@ -11,7 +11,7 @@ const professionalLinks: NavLink[] = [
   { name: "Resume", href: "/resume", isRoute: true },
   { name: "Experience", href: "/experience", isRoute: true },
   { name: "Skills", href: "#skills" },
-  { name: "Goals", href: "#goals" },
+  { name: "Goals", href: "/goals", isRoute: true },
 ]
 
 const personalLinks: NavLink[] = [
@@ -30,7 +30,7 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Name */}
-          <div className="font-semibold text-lg text-slate-900">Richard Goldman</div>
+          <Link href="/" className="font-semibold text-lg text-slate-900 hover:text-slate-600 transition-colors">Richard Goldman</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">

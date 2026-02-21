@@ -10,7 +10,7 @@ type NavLink = { name: string; href: string; isRoute?: boolean }
 const professionalLinks: NavLink[] = [
   { name: "Resume", href: "/resume", isRoute: true },
   { name: "Experience", href: "/experience", isRoute: true },
-  { name: "Skills", href: "#skills" },
+  { name: "Skills", href: "/skills", isRoute: true },
   { name: "Goals", href: "/goals", isRoute: true },
 ]
 

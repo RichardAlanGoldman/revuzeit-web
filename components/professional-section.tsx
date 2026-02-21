@@ -24,6 +24,7 @@ const professionalCards = [
     title: "Skills",
     description: "Technical expertise and core competencies",
     icon: Code,
+    href: "/skills",
   },
   {
     id: "goals",

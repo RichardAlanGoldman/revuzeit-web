@@ -86,7 +86,7 @@ export default function ResumePage() {
   const handlePasscodeSubmit = () => {
     if (passcode === process.env.NEXT_PUBLIC_RESUME_PASSCODE) {
       const link = document.createElement("a")
-      link.href = "/R. Goldman Resume 2025.pdf"
+      link.href = "/R. Goldman Resume 2026.pdf"
       link.download = "Richard_Goldman_Resume.pdf"
       document.body.appendChild(link)
       link.click()

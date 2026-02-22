@@ -1,6 +1,10 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { Navbar } from "@/components/navbar"
 import { ArrowLeft } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 // ── Skills Data ───────────────────────────────────────────────────────────────
 
@@ -58,25 +62,31 @@ const skillSections: Section[] = [
 
 // ── Skill Item with Tooltip ───────────────────────────────────────────────────
 
-function SkillItem({ skill }: { skill: Skill }) {
+function SkillItem({ skill, open, onToggle }: { skill: Skill; open: boolean; onToggle: () => void }) {
   return (
-    <li className="relative group flex gap-3 text-slate-300 leading-relaxed">
+    <li className="relative flex gap-3 text-slate-300 leading-relaxed">
       <span className="text-blue-400 shrink-0 mt-1">•</span>
-      <span className="cursor-default underline decoration-dotted decoration-slate-500 underline-offset-4 group-hover:text-white transition-colors duration-150">
+      <span
+        onClick={onToggle}
+        onMouseEnter={onToggle}
+        onMouseLeave={onToggle}
+        className={cn(
+          "cursor-default underline decoration-dotted decoration-slate-500 underline-offset-4 transition-colors duration-150",
+          open ? "text-white" : ""
+        )}
+      >
         {skill.name}
       </span>
 
       {/* Tooltip */}
-      <div className="
-        pointer-events-none absolute left-6 bottom-full mb-2 z-10
-        w-72 px-3 py-2 rounded-md
-        bg-slate-700 border border-slate-600
-        text-xs text-slate-200 leading-relaxed
-        opacity-0 group-hover:opacity-100
-        translate-y-1 group-hover:translate-y-0
-        transition-all duration-150
-        shadow-lg
-      ">
+      <div className={cn(
+        "pointer-events-none absolute left-6 bottom-full mb-2 z-10",
+        "w-72 px-3 py-2 rounded-md",
+        "bg-slate-700 border border-slate-600",
+        "text-xs text-slate-200 leading-relaxed",
+        "transition-all duration-150 shadow-lg",
+        open ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"
+      )}>
         {skill.description}
         {/* Arrow */}
         <div className="absolute left-4 top-full w-0 h-0 border-x-4 border-x-transparent border-t-4 border-t-slate-700" />
@@ -88,6 +98,11 @@ function SkillItem({ skill }: { skill: Skill }) {
 // ── Page Component ────────────────────────────────────────────────────────────
 
 export default function SkillsPage() {
+  const [openSkill, setOpenSkill] = useState<string | null>(null)
+
+  const toggle = (name: string) =>
+    setOpenSkill((prev) => (prev === name ? null : name))
+
   return (
     <div className="min-h-screen bg-slate-900">
       <Navbar />
@@ -106,7 +121,7 @@ export default function SkillsPage() {
         <div className="mb-10 border-b border-slate-700 pb-8">
           <h1 className="text-4xl font-bold text-white mb-2">Skills</h1>
           <p className="text-slate-400 text-sm">{intro}</p>
-          <p className="text-slate-400 text-sm mt-1">(Hover over any skill for a description.)</p>
+          <p className="text-slate-400 text-sm mt-1">(Tap or hover over any skill for a description.)</p>
         </div>
 
         {/* Skill sections */}
@@ -116,7 +131,12 @@ export default function SkillsPage() {
               <h2 className="text-2xl font-semibold text-blue-400 mb-6">{section.title}</h2>
               <ul className="space-y-4">
                 {section.items.map((skill) => (
-                  <SkillItem key={skill.name} skill={skill} />
+                  <SkillItem
+                    key={skill.name}
+                    skill={skill}
+                    open={openSkill === skill.name}
+                    onToggle={() => toggle(skill.name)}
+                  />
                 ))}
               </ul>
             </section>

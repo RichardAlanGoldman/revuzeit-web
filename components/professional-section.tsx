@@ -37,7 +37,7 @@ const professionalCards = [
 
 export function ProfessionalSection() {
   return (
-    <section className="w-full lg:w-1/2 bg-slate-900 p-6 lg:p-12 min-h-[50vh] lg:min-h-screen flex items-center justify-center">
+    <section className="w-full lg:w-1/2 bg-slate-900 p-6 lg:p-12 min-h-[50vh] lg:min-h-screen flex items-start justify-center pt-12 lg:pt-16">
       <div className="w-full max-w-2xl">
         <div className="mb-8 text-center lg:text-left">
           <h2 className="text-3xl font-bold text-white mb-2">Professional</h2>

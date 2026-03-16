@@ -15,10 +15,11 @@ const professionalLinks: NavLink[] = [
 ]
 
 const personalLinks: NavLink[] = [
-  { name: "Biography", href: "#biography" },
-  { name: "Family", href: "#family" },
-  { name: "Travel", href: "#travel" },
-  { name: "Restaurants", href: "#restaurants" },
+  { name: "Biography", href: "/gallery/biography", isRoute: true },
+  { name: "Family", href: "/gallery/family", isRoute: true },
+  { name: "Travel", href: "/gallery/travel", isRoute: true },
+  { name: "Restaurants", href: "/gallery/restaurants", isRoute: true },
+  { name: "Bookstore", href: "/gallery/bookstore-memories", isRoute: true },
 ]
 
 export function Navbar() {
@@ -48,16 +49,19 @@ export function Navbar() {
               )
             })}
             <div className="w-px h-6 bg-slate-300" />
-            {personalLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
-              >
-                {link.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
-              </a>
-            ))}
+            {personalLinks.map((link) => {
+              const Comp = link.isRoute ? Link : "a"
+              return (
+                <Comp
+                  key={link.name}
+                  href={link.href}
+                  className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
+                >
+                  {link.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
+                </Comp>
+              )
+            })}
           </div>
 
           {/* Mobile Menu Button */}
@@ -98,16 +102,19 @@ export function Navbar() {
           <div className="bg-stone-200 px-4 py-3">
             <div className="text-xs font-semibold text-stone-600 mb-2">Personal</div>
             <div className="space-y-1">
-              {personalLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block px-3 py-2 rounded-md text-sm font-medium text-stone-800 hover:bg-stone-300 transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+              {personalLinks.map((link) => {
+                const Comp = link.isRoute ? Link : "a"
+                return (
+                  <Comp
+                    key={link.name}
+                    href={link.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-3 py-2 rounded-md text-sm font-medium text-stone-800 hover:bg-stone-300 transition-colors"
+                  >
+                    {link.name}
+                  </Comp>
+                )
+              })}
             </div>
           </div>
         </div>

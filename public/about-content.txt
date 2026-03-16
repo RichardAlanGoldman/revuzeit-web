@@ -1,0 +1,64 @@
+* About This Site
+
+** Why I Built It
+
+The revuzeit.com domain was established when my wife Mary Alice and I sold our bookstore, Mystery Lovers Bookshop in 2012. We thought that we would use it to post book reviews, notes about travel, restaurants and so forth.
+
+It turned out it wasn't so easy to develop a website on your own. I just never seemed to have the time to figure it out: the design, the coding, css, javascript, finding a host, paying for it and so on.
+
+Fast forward 13 years. Wow, whole new world.
+
+I'd been experimenting with AI from the initial release of ChatGPT and had tried out Claude, Perplexity and, more recently, Gemini. It made sense to put generative and agentic AI to work building my site--at last.
+
+** How I Built It — The AI Journey
+
+This site was built entirely through conversation with AI tools. I have not written any of the code directly. Instead, I described what I wanted, reviewed what was produced, and guided the direction. What you see here is the result of that collaboration.
+
+** Phase 1: Gemini (December 2025 – January 2026)
+
+I began the project using Google's Gemini as my development partner. Conversation with Gemini led to use of Vercel as a server-less host, free for a Hobby account. Based on Gemini suggestions I adopted the tech stack using Next JS, React and Tailwind CSS. You'll find full details of the tech stack here. 
+
+Starting from scratch in December 2025, the first steps were:
+
+- December 2025: Initial project setup, placeholder page, and official launch of revuzeit.com
+- I used Figma to generate a design based on a prompt. With Gemini's help I copied and pasted the Sigma-generated code into the proper modules in the VS Code IDE.
+- January 2026: First working version of the split-screen layout — the Professional side on the left, the Personal side on the right — which remains the core design of the home page today
+
+** Phase 2: Claude Code (February 2026 – Present)
+
+One of the limitations of Gemini was it's inability to directly update the source code in VS Code leading to quite a bit of copy and paste.
+
+In February 2026 I switched to Anthropic's Claude Code, a terminal-based AI coding assistant because it directly integrated with VS Code. Development accelerated quickly:
+
+- Resume page with a passcode-protected PDF download
+- Experience page with an accordion layout showing roles and accomplishments across Apple, Mystery Lovers Bookshop, and a software career
+- Goals page covering my professional and personal aspirations
+- Skills page with hover and tap-to-reveal descriptions for each tool and technology
+- Navigation improvements throughout the site
+- This About page
+
+I would estimate that these changes required less than 10 hours of my time.
+
+** The Technology Stack
+
+** Framework & Language
+- Next.js 16 with App Router — the framework that powers the site
+- React 19 — the UI library Next.js is built on
+- TypeScript — adds type safety to the JavaScript code
+
+** Styling
+- Tailwind CSS v4 — utility-first CSS framework used for all styling
+- OKLCH color system — a modern color format used for the site's theme
+
+** Components & Icons
+- Radix UI — accessible, unstyled UI primitives
+- Lucide React — the icon library used throughout the site
+
+** Hosting & Deployment
+- GitHub — all code is version-controlled here
+- Vercel — the site is deployed and hosted on Vercel, with automatic deployments on every push to the main branch
+
+** Development Tools
+- Claude Code — Anthropic's AI coding assistant, used for the majority of development
+- VS Code to maintain the source and host Claude code
+- Gemini — Google's AI assistant, used in the early phases of the project

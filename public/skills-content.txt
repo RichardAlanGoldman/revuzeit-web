@@ -1,0 +1,53 @@
+* Skills
+
+A collection of technical and professional tools developed across a career in software, retail, and operations.
+
+** Development & Programming
+- Python 3
+-- A general-purpose programming language I've used for data analysis, automation, and building Mac applications in a classroom setting.
+- Jupyter Notebooks
+-- An interactive environment for writing and running Python code, ideal for exploration and documentation.
+- HTML / CSS
+-- The foundational languages of the web, used to structure and style pages like this one.
+- JavaScript (fundamentals)
+-- The programming language that powers interactivity on the web.
+- Web Development with Gemini & Claude Code
+-- AI-assisted development tools I've used to build and iterate on this site.
+
+** Apple Retail Tools
+- EasyPay
+-- Apple's mobile point-of-sale system, used by retail specialists to process transactions anywhere on the floor.
+- Mobile Genius
+-- Apple's internal system for creating and managing repairs, and customer cases.
+- Concierge
+-- Apple's customer check-in and queue management system used at the store entrance.
+- Prism
+-- Apple's tool for Voice Specialists in the Online Store to manage customer interactions.
+- Toolbox
+-- Apple's tool for managing orders in the Online Store.
+
+** Project & Quality Management
+- Wrike
+-- A project management platform used to plan, track, and coordinate projects or other group activites.
+- Mozaic
+-- Apple's system for managing CapEx project approval and scheduling.
+- Caliber
+-- A reporting dashboard to manage UAT testing progress.
+- Radar
+-- Apple's internal bug tracking system, used to log, monitor, and follow up on software defects.
+
+** Collaboration & Communication
+- Slack
+-- Team messaging platform used for real-time communication and remote support.
+- Webex
+-- Cisco's video conferencing platform, used extensively for remote meetings and training sessions.
+- Quip
+-- Salesforce's collaborative document and spreadsheet tool, used for shared documentation.
+- Chorus
+-- An Apple tool for making internal documentation available to teams
+
+.
+
+** Productivity
+- Pages / Numbers / Keynote
+-- Apple's iWork suite covering word processing, spreadsheets, and presentations.

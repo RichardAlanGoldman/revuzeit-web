@@ -8,7 +8,7 @@ It turned out it wasn't so easy to develop a website on your own. I just never s
 
 Fast forward 13 years. Wow, whole new world.
 
-I'd been experimenting with AI from the initial release of ChatGPT and had tried out Claude, Perplexity and, more recently, Gemini. It made sense to put generative and agentic AI to work building my site--at last.
+I'd been experimenting with AI from the initial release of ChatGPT and had tried out Claude, Perplexity and, more recently, Gemini. It made sense to put generative and agentic AI to work building my site — at last.
 
 ** How I Built It — The AI Journey
 
@@ -16,17 +16,17 @@ This site was built entirely through conversation with AI tools. I have not writ
 
 ** Phase 1: Gemini (December 2025 – January 2026)
 
-I began the project using Google's Gemini as my development partner. Conversation with Gemini led to use of Vercel as a server-less host, free for a Hobby account. Based on Gemini suggestions I adopted the tech stack using Next JS, React and Tailwind CSS. You'll find full details of the tech stack here. 
+I began the project using Google's Gemini as my development partner. Conversation with Gemini led to use of Vercel as a server-less host, free for a Hobby account. Based on Gemini suggestions I adopted the tech stack using Next JS, React and Tailwind CSS. You'll find full details of the tech stack here.
 
 Starting from scratch in December 2025, the first steps were:
 
 - December 2025: Initial project setup, placeholder page, and official launch of revuzeit.com
-- I used Figma to generate a design based on a prompt. With Gemini's help I copied and pasted the Sigma-generated code into the proper modules in the VS Code IDE.
+- I used Figma to generate a design based on a prompt. With Gemini's help I copied and pasted the Figma-generated code into the proper modules in the VS Code IDE.
 - January 2026: First working version of the split-screen layout — the Professional side on the left, the Personal side on the right — which remains the core design of the home page today
 
-** Phase 2: Claude Code (February 2026 – Present)
+** Phase 2: Claude Code (February 2026) — The Professional Side
 
-One of the limitations of Gemini was it's inability to directly update the source code in VS Code leading to quite a bit of copy and paste.
+One of the limitations of Gemini was its inability to directly update the source code in VS Code, leading to quite a bit of copy and paste.
 
 In February 2026 I switched to Anthropic's Claude Code, a terminal-based AI coding assistant because it directly integrated with VS Code. Development accelerated quickly:
 
@@ -38,6 +38,23 @@ In February 2026 I switched to Anthropic's Claude Code, a terminal-based AI codi
 - This About page
 
 I would estimate that these changes required less than 10 hours of my time.
+
+** Phase 3: Claude Code (March 2026) — The Personal Side
+
+In early March I turned to development of the Personal side of the site — the photo gallery system.
+
+In discussion with Claude we evolved an approach using Major Categories (such as Family, Biography, Travel) and Minor Categories (Albums). Each album would have descriptive text and a series of photos, each with a caption.
+
+Links from the Major Category cards on the home page lead to a display of Albums, which in turn show descriptive text plus a photo gallery with a full-screen lightbox viewer. This required:
+
+- A Postgres database (provided by Neon via Vercel) to store categories, captions, and metadata
+- A Blob store (Vercel) to hold the actual photo files
+- An admin interface to create and manage categories and upload photos
+- Automatic EXIF extraction — pulling date taken and GPS coordinates directly from HEIC and JPEG files
+- Reverse geocoding — converting GPS coordinates to a readable location name using OpenStreetMap
+- Image processing — converting HEIC photos to WebP format and resizing for the web using Sharp
+
+All of this was accomplished over a period of a few days with probably 6 to 8 hours of my time, with Claude generating all of the code.
 
 ** The Technology Stack
 
@@ -60,5 +77,5 @@ I would estimate that these changes required less than 10 hours of my time.
 
 ** Development Tools
 - Claude Code — Anthropic's AI coding assistant, used for the majority of development
-- VS Code to maintain the source and host Claude code
+- VS Code — used to maintain the source and host Claude Code
 - Gemini — Google's AI assistant, used in the early phases of the project

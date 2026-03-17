@@ -174,7 +174,7 @@ export default function AboutPage() {
 
           {/* Phase 2 */}
           <section>
-            <h2 className="text-2xl font-semibold text-blue-400 mb-5">Phase 2: Claude Code (February 2026 – Present)</h2>
+            <h2 className="text-2xl font-semibold text-blue-400 mb-5">Phase 2: Claude Code (February 2026) — The Professional Side</h2>
             <div className="space-y-4">
               <p>One of the limitations of Gemini was its inability to directly update the source code in VS Code, leading to quite a bit of copy and paste.</p>
               <p>In February 2026 I switched to Anthropic's Claude Code, a terminal-based AI coding assistant because it directly integrated with VS Code. Development accelerated quickly:</p>
@@ -194,6 +194,32 @@ export default function AboutPage() {
                 ))}
               </ul>
               <p>I would estimate that these changes required less than 10 hours of my time.</p>
+            </div>
+          </section>
+
+          {/* Phase 3 */}
+          <section>
+            <h2 className="text-2xl font-semibold text-blue-400 mb-5">Phase 3: Claude Code (March 2026) — The Personal Side</h2>
+            <div className="space-y-4">
+              <p>In early March I turned to development of the Personal side of the site — the photo gallery system.</p>
+              <p>In discussion with Claude we evolved an approach using Major Categories (such as Family, Biography, Travel) and Minor Categories (Albums). Each album would have descriptive text and a series of photos, each with a caption.</p>
+              <p>Links from the Major Category cards on the home page lead to a display of Albums, which in turn show descriptive text plus a photo gallery with a full-screen lightbox viewer. This required:</p>
+              <ul className="space-y-2">
+                {[
+                  "A Postgres database (provided by Neon via Vercel) to store categories, captions, and metadata",
+                  "A Blob store (Vercel) to hold the actual photo files",
+                  "An admin interface to create and manage categories and upload photos",
+                  "Automatic EXIF extraction — pulling date taken and GPS coordinates directly from HEIC and JPEG files",
+                  "Reverse geocoding — converting GPS coordinates to a readable location name using OpenStreetMap",
+                  "Image processing — converting HEIC photos to WebP format and resizing for the web using Sharp",
+                ].map((item, i) => (
+                  <li key={i} className="flex gap-3">
+                    <span className="text-blue-400 shrink-0 mt-1">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p>All of this was accomplished over a period of a few days with probably 6 to 8 hours of my time, with Claude generating all of the code.</p>
             </div>
           </section>
 

@@ -31,6 +31,17 @@ const techStack = [
     ],
   },
   {
+    category: "Data & Storage",
+    items: [
+      { name: "Neon Postgres", description: "Serverless Postgres database (via Vercel) storing photo metadata, captions, and category structure" },
+      { name: "Vercel Blob", description: "Object storage for the processed photo files" },
+      { name: "Sharp", description: "Server-side image processing — converts HEIC to WebP and resizes photos for the web" },
+      { name: "exifr", description: "Extracts EXIF metadata (date taken, GPS coordinates) directly from HEIC and JPEG files" },
+      { name: "Nominatim / OpenStreetMap", description: "Free reverse geocoding API — converts GPS coordinates to a readable city and state" },
+      { name: "jose", description: "Edge-compatible JWT library used for the admin session cookie" },
+    ],
+  },
+  {
     category: "Hosting & Deployment",
     items: [
       { name: "GitHub", description: "All code is version-controlled here" },

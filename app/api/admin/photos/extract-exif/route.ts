@@ -23,20 +23,13 @@ export async function POST(request: NextRequest) {
     let longitude: number | null = null
     let locationName: string | null = null
 
-    // Extract date separately — pick all date fields for debugging
+    // Extract date separately
     const exif = await exifr.default.parse(buffer, {
       tiff: true,
       exif: true,
       gps: false,
-      pick: ['DateTimeOriginal', 'CreateDate', 'ModifyDate', 'DateTime', 'DateCreated'],
+      pick: ['DateTimeOriginal'],
     })
-    console.log('[extract-exif] all date fields:', JSON.stringify({
-      DateTimeOriginal: exif?.DateTimeOriginal,
-      CreateDate: exif?.CreateDate,
-      ModifyDate: exif?.ModifyDate,
-      DateTime: exif?.DateTime,
-      DateCreated: exif?.DateCreated,
-    }))
     if (exif) {
       const rawDate = exif.DateTimeOriginal
       if (rawDate instanceof Date) {

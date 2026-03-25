@@ -61,7 +61,7 @@ export default function UploadClient({ categories: initialCategories }: { catego
       if (res.ok) {
         const exif: ExifData = await res.json()
         if (exif.dateTaken) {
-          setDateTaken(new Date(exif.dateTaken).toISOString().slice(0, 16))
+          setDateTaken(new Date(exif.dateTaken).toISOString().slice(0, 10))
         }
         if (exif.locationName) setLocationName(exif.locationName)
       }
@@ -151,7 +151,8 @@ export default function UploadClient({ categories: initialCategories }: { catego
       formData.append('minorCategoryId', minorCategoryId)
       formData.append('caption', caption)
       formData.append('locationName', locationName)
-      formData.append('dateTaken', dateTaken)
+      const parsedDate = dateTaken ? new Date(dateTaken).toISOString() : ''
+      formData.append('dateTaken', parsedDate)
       formData.append('displayOrder', displayOrder)
 
       const res = await fetch('/api/admin/photos/upload', {
@@ -322,10 +323,11 @@ export default function UploadClient({ categories: initialCategories }: { catego
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Date Taken</label>
                 <input
-                  type="datetime-local"
+                  type="text"
                   className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
                   value={dateTaken}
                   onChange={(e) => setDateTaken(e.target.value)}
+                  placeholder="YYYY-MM-DD"
                 />
               </div>
               <div>

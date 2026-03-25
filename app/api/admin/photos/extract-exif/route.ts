@@ -28,10 +28,10 @@ export async function POST(request: NextRequest) {
       tiff: true,
       exif: true,
       gps: false,
-      pick: ['DateTimeOriginal', 'CreateDate'],
+      pick: ['DateTimeOriginal'],
     })
     if (exif) {
-      const rawDate = exif.DateTimeOriginal ?? exif.CreateDate
+      const rawDate = exif.DateTimeOriginal
       if (rawDate instanceof Date) {
         dateTaken = rawDate.toISOString()
       } else if (typeof rawDate === 'string') {

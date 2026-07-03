@@ -44,7 +44,7 @@ const personalCards = [
 
 export function PersonalSection() {
   return (
-    <section className="w-full lg:w-1/2 bg-stone-100 p-6 lg:p-12 min-h-[50vh] lg:min-h-screen flex items-start justify-center pt-12 lg:pt-16">
+    <section className="w-full lg:w-1/2 bg-stone-100 px-6 lg:px-12 py-14 lg:py-20 flex items-start justify-center">
       <div className="w-full max-w-2xl">
         <div className="mb-8 text-center lg:text-left">
           <h2 className="text-3xl font-bold text-stone-900 mb-2">Personal</h2>
@@ -57,7 +57,7 @@ export function PersonalSection() {
             const Comp = card.href.startsWith("/") ? Link : "a"
             return (
               <Comp key={card.id} href={card.href} id={card.id} className="group cursor-pointer">
-                <Card className="h-full bg-white border-0 p-6 rounded-2xl shadow-md hover:shadow-2xl hover:shadow-amber-200/50 hover:-translate-y-1 transition-all duration-300">
+                <Card className="h-full bg-white border border-stone-200 p-6 rounded-2xl shadow-sm hover:border-amber-400/70 hover:-translate-y-1 hover:shadow-lg hover:shadow-stone-300/60 transition-all duration-300">
                   <div className="flex flex-col gap-4">
                     <div className="w-12 h-12 rounded-xl bg-stone-50 flex items-center justify-center border border-stone-200 group-hover:border-amber-400 group-hover:bg-amber-50 transition-all duration-300">
                       <Icon className="w-6 h-6 text-stone-500 group-hover:text-amber-600 transition-colors duration-300" />

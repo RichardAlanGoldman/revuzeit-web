@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { Image as ImageIcon } from 'lucide-react'
 import Lightbox from './lightbox'
 import type { Photo } from '@/lib/db/queries'
 
@@ -9,7 +10,13 @@ export default function PhotoGrid({ photos }: { photos: Photo[] }) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   if (photos.length === 0) {
-    return <p className="text-stone-400 text-sm">No photos in this album yet.</p>
+    return (
+      <div className="flex flex-col items-center justify-center text-center py-20 rounded-2xl border border-dashed border-stone-300 bg-white/60">
+        <ImageIcon size={36} className="text-stone-300 mb-4" />
+        <p className="text-stone-600 font-medium">No photos in this album yet</p>
+        <p className="text-sm text-stone-400 mt-1">Check back soon.</p>
+      </div>
+    )
   }
 
   return (

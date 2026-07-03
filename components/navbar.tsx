@@ -2,72 +2,76 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
-import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
+import { professionalLinks, personalLinks, isDarkRoute, type NavLink } from "@/lib/navigation"
 
-type NavLink = { name: string; href: string; isRoute?: boolean }
-
-const professionalLinks: NavLink[] = [
-  { name: "Resume", href: "/resume", isRoute: true },
-  { name: "Experience", href: "/experience", isRoute: true },
-  { name: "Skills", href: "/skills", isRoute: true },
-  { name: "Goals", href: "/goals", isRoute: true },
-]
-
-const personalLinks: NavLink[] = [
-  { name: "Biography", href: "/gallery/biography", isRoute: true },
-  { name: "Family", href: "/gallery/family", isRoute: true },
-  { name: "Travel", href: "/gallery/travel", isRoute: true },
-  { name: "Restaurants", href: "/gallery/restaurants", isRoute: true },
-  { name: "Bookstore", href: "/gallery/bookstore-memories", isRoute: true },
-]
+function DesktopLink({ link, dark, accent }: { link: NavLink; dark: boolean; accent: "blue" | "amber" }) {
+  return (
+    <Link
+      href={link.href}
+      className={cn(
+        "text-sm font-medium relative group transition-colors",
+        dark ? "text-slate-300 hover:text-white" : "text-slate-700 hover:text-slate-900"
+      )}
+    >
+      {link.name}
+      <span
+        className={cn(
+          "absolute -bottom-1 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300",
+          accent === "blue" ? "bg-blue-500" : "bg-amber-500"
+        )}
+      />
+    </Link>
+  )
+}
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const isMobile = useIsMobile()
+  const pathname = usePathname()
+  const dark = isDarkRoute(pathname)
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/70 backdrop-blur-md border-b border-white/20 shadow-sm">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b shadow-sm",
+        dark ? "bg-slate-900/70 border-slate-700/60" : "bg-white/70 border-white/20"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Name */}
-          <Link href="/" className="font-semibold text-lg text-slate-900 hover:text-slate-600 transition-colors">Richard Goldman</Link>
+          <Link
+            href="/"
+            className={cn(
+              "font-semibold text-lg transition-colors",
+              dark ? "text-white hover:text-slate-300" : "text-slate-900 hover:text-slate-600"
+            )}
+          >
+            Richard Goldman
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
-            {professionalLinks.map((link) => {
-              const Comp = link.isRoute ? Link : "a"
-              return (
-                <Comp
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(59,130,246,0.6)]" />
-                </Comp>
-              )
-            })}
-            <div className="w-px h-6 bg-slate-300" />
-            {personalLinks.map((link) => {
-              const Comp = link.isRoute ? Link : "a"
-              return (
-                <Comp
-                  key={link.name}
-                  href={link.href}
-                  className="text-sm font-medium text-slate-700 hover:text-slate-900 relative group transition-colors"
-                >
-                  {link.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(245,158,11,0.6)]" />
-                </Comp>
-              )
-            })}
+            {professionalLinks.map((link) => (
+              <DesktopLink key={link.name} link={link} dark={dark} accent="blue" />
+            ))}
+            <div className={cn("w-px h-6", dark ? "bg-slate-600" : "bg-slate-300")} />
+            {personalLinks.map((link) => (
+              <DesktopLink key={link.name} link={link} dark={dark} accent="amber" />
+            ))}
           </div>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-md text-slate-700 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+            className={cn(
+              "lg:hidden p-2 rounded-md transition-colors",
+              dark
+                ? "text-slate-300 hover:text-white hover:bg-slate-800"
+                : "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+            )}
             aria-label="Toggle menu"
           >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -77,24 +81,26 @@ export function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-white/20 backdrop-blur-md bg-white/70">
+        <div
+          className={cn(
+            "lg:hidden border-t backdrop-blur-md",
+            dark ? "border-slate-700/60 bg-slate-900/70" : "border-white/20 bg-white/70"
+          )}
+        >
           {/* Professional Links Block */}
           <div className="bg-slate-700 px-4 py-3">
             <div className="text-xs font-semibold text-slate-300 mb-2">Professional</div>
             <div className="space-y-1">
-              {professionalLinks.map((link) => {
-                const Comp = link.isRoute ? Link : "a"
-                return (
-                  <Comp
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-600 transition-colors"
-                  >
-                    {link.name}
-                  </Comp>
-                )
-              })}
+              {professionalLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-slate-600 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -102,19 +108,16 @@ export function Navbar() {
           <div className="bg-stone-200 px-4 py-3">
             <div className="text-xs font-semibold text-stone-600 mb-2">Personal</div>
             <div className="space-y-1">
-              {personalLinks.map((link) => {
-                const Comp = link.isRoute ? Link : "a"
-                return (
-                  <Comp
-                    key={link.name}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-3 py-2 rounded-md text-sm font-medium text-stone-800 hover:bg-stone-300 transition-colors"
-                  >
-                    {link.name}
-                  </Comp>
-                )
-              })}
+              {personalLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block px-3 py-2 rounded-md text-sm font-medium text-stone-800 hover:bg-stone-300 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

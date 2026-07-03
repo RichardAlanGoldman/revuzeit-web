@@ -37,7 +37,7 @@ const professionalCards = [
 
 export function ProfessionalSection() {
   return (
-    <section className="w-full lg:w-1/2 bg-slate-900 p-6 lg:p-12 min-h-[50vh] lg:min-h-screen flex items-start justify-center pt-12 lg:pt-16">
+    <section className="w-full lg:w-1/2 bg-slate-900 px-6 lg:px-12 py-14 lg:py-20 flex items-start justify-center">
       <div className="w-full max-w-2xl">
         <div className="mb-8 text-center lg:text-left">
           <h2 className="text-3xl font-bold text-white mb-2">Professional</h2>
@@ -51,7 +51,7 @@ export function ProfessionalSection() {
             const Comp = card.href ? Link : "a"
             return (
               <Comp key={card.id} href={cardHref} id={card.id} className="group cursor-pointer">
-                <Card className="h-full bg-slate-900 border border-slate-700 hover:border-blue-500 p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] hover:scale-[1.02]">
+                <Card className="h-full bg-slate-800/50 border border-slate-700 hover:border-blue-500/70 p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-950/50">
                   <div className="flex flex-col gap-4">
                     <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center border border-slate-700 group-hover:border-blue-500 group-hover:bg-blue-500/10 transition-all duration-300">
                       <Icon className="w-6 h-6 text-slate-400 group-hover:text-blue-400 transition-colors duration-300" />

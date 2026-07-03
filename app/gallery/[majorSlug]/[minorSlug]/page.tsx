@@ -39,7 +39,7 @@ export default async function MinorCategoryPage({
   const photos = await getPhotosByMinorCategory(minor.id)
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 pt-8 pb-16">
       {/* Back link */}
       <Link
         href={`/gallery/${majorSlug}`}
@@ -49,7 +49,7 @@ export default async function MinorCategoryPage({
         Back to {major.name}
       </Link>
 
-      <h1 className="text-3xl font-bold text-stone-800 mb-2">{minor.name}</h1>
+      <h1 className="text-4xl font-bold tracking-tight text-stone-800 mb-2">{minor.name}</h1>
 
       {/* Description (markdown) */}
       {minor.description && (

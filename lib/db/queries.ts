@@ -52,6 +52,15 @@ export type MajorCategoryWithMinors = MajorCategory & {
   minors: MinorCategory[]
 }
 
+export type MinorCategoryWithMeta = MinorCategory & {
+  photo_count: number
+  cover_url: string | null
+}
+
+export type MajorCategoryWithMinorMeta = MajorCategory & {
+  minors: MinorCategoryWithMeta[]
+}
+
 // ─── Major Categories ─────────────────────────────────────────────────────────
 
 export async function getMajorCategories(): Promise<MajorCategory[]> {
@@ -115,6 +124,66 @@ export async function getMinorCategoriesByMajor(majorId: number): Promise<MinorC
     ORDER BY display_order ASC, name ASC
   `
   return rows as MinorCategory[]
+}
+
+export async function getMinorCategoriesWithMeta(majorId: number): Promise<MinorCategoryWithMeta[]> {
+  const sql = getDb()
+  const rows = await sql`
+    SELECT
+      mn.*,
+      COUNT(p.id)::int AS photo_count,
+      (
+        SELECT blob_url FROM photos
+        WHERE minor_category_id = mn.id
+        ORDER BY display_order ASC, date_taken ASC
+        LIMIT 1
+      ) AS cover_url
+    FROM minor_categories mn
+    LEFT JOIN photos p ON p.minor_category_id = mn.id
+    WHERE mn.major_category_id = ${majorId}
+    GROUP BY mn.id
+    ORDER BY mn.display_order ASC, mn.name ASC
+  `
+  return rows as MinorCategoryWithMeta[]
+}
+
+export async function getAllMajorCategoriesWithMinorMeta(): Promise<MajorCategoryWithMinorMeta[]> {
+  const sql = getDb()
+  const majors = await sql`SELECT * FROM major_categories ORDER BY name ASC`
+  const minors = await sql`
+    SELECT
+      mn.*,
+      COUNT(p.id)::int AS photo_count,
+      (
+        SELECT blob_url FROM photos
+        WHERE minor_category_id = mn.id
+        ORDER BY display_order ASC, date_taken ASC
+        LIMIT 1
+      ) AS cover_url
+    FROM minor_categories mn
+    LEFT JOIN photos p ON p.minor_category_id = mn.id
+    GROUP BY mn.id
+    ORDER BY mn.display_order ASC, mn.name ASC
+  `
+  return (majors as MajorCategory[]).map((major) => ({
+    ...major,
+    minors: (minors as MinorCategoryWithMeta[]).filter((m) => m.major_category_id === major.id),
+  }))
+}
+
+export async function reorderMinorCategories(
+  majorId: number,
+  orderedIds: number[]
+): Promise<void> {
+  const sql = getDb()
+  await Promise.all(
+    orderedIds.map(
+      (id, index) => sql`
+        UPDATE minor_categories SET display_order = ${index}
+        WHERE id = ${id} AND major_category_id = ${majorId}
+      `
+    )
+  )
 }
 
 export async function getMinorCategoryBySlug(

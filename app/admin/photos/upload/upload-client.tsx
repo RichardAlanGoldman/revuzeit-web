@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { Upload, X, CheckCircle } from 'lucide-react'
 import type { MajorCategoryWithMinors } from '@/lib/db/queries'
 import { slugify } from '@/lib/utils/slugify'
+import DatePicker from '@/components/ui/date-picker'
 
 type ExifData = {
   dateTaken: string | null
@@ -163,6 +164,7 @@ export default function UploadClient({ categories: initialCategories }: { catego
       if (res.ok) {
         setState('success')
         router.refresh()
+        setTimeout(reset, 1500)
       } else {
         const data = await res.json()
         setErrorMsg(data.error ?? 'Upload failed')
@@ -201,9 +203,9 @@ export default function UploadClient({ categories: initialCategories }: { catego
           />
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
           {/* Preview */}
-          <div className="relative bg-gray-100">
+          <div className="relative bg-gray-100 rounded-t-lg overflow-hidden">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={preview!} alt="Preview" className="w-full max-h-64 object-contain" />
             <button
@@ -322,13 +324,7 @@ export default function UploadClient({ categories: initialCategories }: { catego
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Date Taken</label>
-                <input
-                  type="text"
-                  className="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
-                  value={dateTaken}
-                  onChange={(e) => setDateTaken(e.target.value)}
-                  placeholder="YYYY-MM-DD"
-                />
+                <DatePicker value={dateTaken} onChange={setDateTaken} />
               </div>
               <div>
                 <label className="block text-sm font-medium text-slate-700 mb-1">Display Order</label>

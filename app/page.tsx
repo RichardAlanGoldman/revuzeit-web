@@ -21,7 +21,7 @@ export default function HomePage() {
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
             Twenty-five years in software, twenty-two years behind the counter at
             Mystery Lovers Bookshop, and now a Creative at Apple Shadyside.
-            This is where I keep both the career and the life.
+            Here&apos;s the story of me, my family and my career.
           </p>
 
           {/* Dual-identity accent: blue for professional, amber for personal */}

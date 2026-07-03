@@ -10,7 +10,7 @@ export default function HomePage() {
       <Navbar />
 
       {/* Hero */}
-      <header className="bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 pt-16">
+      <header className="bg-gradient-to-br from-slate-800 via-slate-700 to-slate-600 pt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
           <p className="text-sm font-medium uppercase tracking-widest text-slate-400 mb-4">
             Pittsburgh, PA
